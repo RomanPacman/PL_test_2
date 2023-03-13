@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" placeholder="Введите артикул" name="one_article">
+    <p1>ИЛИ</p1>
+    <input type="file" placeholder="Укажите файл" name="more_article">
+    <button type="submit">Получить данные</button>
+    <br>
+    <br>
+    {% if data_1 %}
+        <table border="1">
+            <tr>
+                <td>{{ data_1.article }}</td>
+                <td>{{ data_1.title }}</td>
+                <td>{{ data_1.brand }}</td>
+            </tr>
+        </table>
+        {{ data_1.json }}
+    {% endif %}
+
+    <br>
+    <br>
+
+    {% if data_file %}
+        <table border="1">
+            {% for el in data_file %}
+                <tr>
+                    <td>{{ el.article }}</td>
+                    <td>{{ el.title }}</td>
+                    <td>{{ el.brand }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        {% for el in data_file %}
+
+            {{ el.json }}
+            <br>
+        {% endfor %}
+    {% endif %}
+
+
+</form>
+
+
+</body>
+</html>
